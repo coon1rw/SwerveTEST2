@@ -18,4 +18,9 @@ public class Conversions {
         return 0;
     }
 
+    public static double falconToMeters(double selectedSensorPosition, double wheelcircumference,
+            double drivegearratio) {
+        return 0;
+    }
+
 }
