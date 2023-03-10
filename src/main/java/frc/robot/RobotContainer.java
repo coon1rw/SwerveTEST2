@@ -84,7 +84,7 @@ public class RobotContainer {
                 () -> input,
                 () -> 0,
                 () -> 0,
-                () -> robotCentric.getAsBoolean(),
+                // () -> robotCentric.getAsBoolean(),
                 () -> false);
 
         return new ParallelDeadlineGroup(new WaitCommand(seconds), driveCommand);
