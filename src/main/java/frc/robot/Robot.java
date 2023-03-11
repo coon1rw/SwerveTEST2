@@ -4,11 +4,16 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.PneumaticSubsystem;
+//import frc.robot.subsystems.ElevatorSubsystem;
+//import frc.robot.subsystems.PneumaticSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -17,14 +22,21 @@ import frc.robot.subsystems.PneumaticSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
+  
+  //WPI_TalonFX rollerMotor = new WPI_TalonFX(15);
+  WPI_TalonFX flipperMotor = new WPI_TalonFX(16);
+  Joystick joystick2 = new Joystick(1);
+  final NeutralMode kBrakeDurNeutral = NeutralMode.Brake;
+  //top = 58618
+  //forward = 36697
 
   public static CTREConfigs ctreConfigs;
 
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private ElevatorSubsystem m_elevator;
-  private PneumaticSubsystem m_pneumatic;
+  //private ElevatorSubsystem m_elevator;
+  //private PneumaticSubsystem m_pneumatic;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -36,6 +48,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    //rollerMotor.setNeutralMode(kBrakeDurNeutral);
   }
 
   /**
@@ -52,6 +65,8 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("Flipper", flipperMotor.getSelectedSensorPosition());
+
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -86,12 +101,32 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
   }
-
+  
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    m_elevator.elevator();
-    m_pneumatic.pneumatic();
+    //m_elevator.elevator();
+    //m_pneumatic.pneumatic();
+    if (joystick2.getPOV() == 180){
+
+      flipperMotor.set(.5);
+      } else {
+        flipperMotor.set(0);
+      }
+    if (joystick2.getPOV() == 0){
+
+      flipperMotor.set(-.5);
+    } 
+    
+    /*if (joystick2.getRawButton(1)) {
+      rollerMotor.set(.5);
+    } else {
+      rollerMotor.set(0);
+    }
+    if (joystick2.getRawButton(2)){
+      rollerMotor.set(-.6);
+    }*/
+
   }
   
 
