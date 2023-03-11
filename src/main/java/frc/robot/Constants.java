@@ -13,6 +13,15 @@ import frc.lib.util.SwerveModuleConstants;
 public final class Constants {
     public static final double stickDeadband = 0.1;
 
+    public static final double FLIPPER_TOP = 58618;
+    public static final double FLIPPER_FORWARD = 36697;
+
+    // need to make a range for each limit so encoder isn't trying to reach a perfect position
+    public static final double FLIPPER_TOP_RANGE = (FLIPPER_TOP * 0.10);
+
+    // need to make a range for each limit so encoder isn't trying to reach a perfect position
+    public static final double FLIPPER_FORWARD_RANGE = (FLIPPER_FORWARD * 0.10);
+
     public static final class Swerve {
         public static final int pigeon2ID = 13;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
@@ -145,4 +154,6 @@ public final class Constants {
             new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
+
+
 }
