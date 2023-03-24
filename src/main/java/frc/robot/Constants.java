@@ -94,7 +94,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 9;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(286.25);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(285.55);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -104,7 +104,7 @@ public final class Constants {
             public static final int driveMotorID = 2;
             public static final int angleMotorID = 5;
             public static final int canCoderID = 10;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(6.15);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(6.41);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -114,7 +114,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 11;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(23.90);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(23.73);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -124,7 +124,7 @@ public final class Constants {
             public static final int driveMotorID = 4;
             public static final int angleMotorID = 3;
             public static final int canCoderID = 12;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(228.51);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(292.58);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -145,4 +145,41 @@ public final class Constants {
             new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
+
+    /*Itake code*/
+        
+        /**
+	 * Which PID slot to pull gains from. Starting 2018, you can choose from
+	 * 0,1,2 or 3. Only the first two (0,1) are visible in web-based
+	 * configuration.
+	 */
+	public static final int kSlotIdx = 0;
+
+	/**
+	 * Talon FX supports multiple (cascaded) PID loops. For
+	 * now we just want the primary one.
+	 */
+	public static final int kPIDLoopIdx = 0;
+
+	/**
+	 * Set to zero to skip waiting for confirmation, set to nonzero to wait and
+	 * report to DS if action fails.
+	 */
+	public static final int kTimeoutMs = 30;
+	
+	/* Choose so that Talon does not report sensor out of phase */
+	public static boolean kSensorPhase = true;
+
+	/**
+	 * Choose based on what direction you want to be positive,
+	 * this does not affect motor invert. 
+	 */
+	public static boolean kMotorInvert = false;
+
+	/**
+	 * Gains used in Positon Closed Loop, to be adjusted accordingly
+     * Gains(kp, ki, kd, kf, izone, peak output);
+     */ //dont touch _kI or _kD
+    static final Gains kGains = new Gains(0.3, 0.0, 0.25, 0.0, 0, .5);
+
 }
